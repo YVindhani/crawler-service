@@ -1,19 +1,19 @@
-# ✅ Use Playwright's official image (includes Chromium, WebKit, Firefox + all libs)
-FROM mcr.microsoft.com/playwright:v1.41.2-focal
+# ✅ Use Playwright's official image with browsers + deps
+FROM mcr.microsoft.com/playwright:v1.55.0-noble
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files first (for caching)
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the code
+# Copy the rest of your code
 COPY . .
 
-# Expose the port Railway will assign
+# Expose Railway's port
 EXPOSE 8080
 
 # Start the app
