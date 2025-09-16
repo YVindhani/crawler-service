@@ -1,0 +1,14 @@
+{
+  "name": "crawler-service",
+  "version": "1.0.0",
+  "description": "Playwright-based web crawler for MVP",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "playwright": "^1.41.2"
+  }
+}
