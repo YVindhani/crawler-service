@@ -25,5 +25,8 @@ app.post("/api/crawl", async (req, res) => {
   }
 });
 
-// ✅ Export handler for Vercel
-export default app;
+// ✅ Use Railway's assigned port (or 3000 locally)
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Crawler running on port ${PORT}`);
+});
