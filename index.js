@@ -4,8 +4,7 @@ import { chromium } from "playwright";
 const app = express();
 app.use(express.json());
 
-// Simple crawler endpoint
-app.post("/crawl", async (req, res) => {
+app.post("/api/crawl", async (req, res) => {
   const { url } = req.body;
 
   if (!url) return res.status(400).json({ error: "Missing url" });
@@ -26,7 +25,5 @@ app.post("/crawl", async (req, res) => {
   }
 });
 
-// Default port for Vercel is handled automatically
-app.listen(3000, () => {
-  console.log("Crawler running...");
-});
+// ✅ Export handler for Vercel
+export default app;
