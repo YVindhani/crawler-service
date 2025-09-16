@@ -10,7 +10,11 @@ app.post("/api/crawl", async (req, res) => {
   if (!url) return res.status(400).json({ error: "Missing url" });
 
   try {
-    const browser = await chromium.launch();
+    // ✅ Launch Chromium with flags to work in Railway containers
+    const browser = await chromium.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    });
+
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle" });
 
@@ -21,11 +25,12 @@ app.post("/api/crawl", async (req, res) => {
 
     res.json({ url, title, text });
   } catch (error) {
+    console.error("Crawler error:", error);
     res.status(500).json({ error: error.message });
   }
 });
 
-// ✅ Use Railway's assigned port (or 3000 locally)
+// ✅ Use Railway's dynamic port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Crawler running on port ${PORT}`);
