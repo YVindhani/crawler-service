@@ -5,7 +5,9 @@ const app = express();
 app.use(express.json());
 
 app.post("/api/crawl", async (req, res) => {
-  const { url } = req.body;
+  console.log("👉 Received POST /api/crawl with body:", req.body);  
+
+const { url } = req.body;
 
   if (!url) return res.status(400).json({ error: "Missing url" });
 
